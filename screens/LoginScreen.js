@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, Image, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Image,
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Input } from "react-native-elements/dist/input/Input";
 
@@ -9,13 +16,14 @@ const LoginScreen = () => {
 
   const signIn = () => {};
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <StatusBar style="light"></StatusBar>
+      <Text style={styles.titleName}>FNChat</Text>
       <Image
         source={{
           uri: "https://www.online-tech-tips.com/wp-content/uploads/2020/09/Google_Messages_logo.png",
         }}
-        style={{ width: 250, height: 200 }}
+        style={{ width: 200, height: 130, marginBottom: 20 }}
       ></Image>
       <View style={styles.inputContainer}>
         <Input
@@ -30,18 +38,11 @@ const LoginScreen = () => {
           type="password"
           onChangeText={(text) => setPassword(text)}
         ></Input>
-        <Button
-          containerStyle={styles.button}
-          onPress={signIn}
-          title="Login"
-        ></Button>
-        <Button
-          containerStyle={styles.button}
-          type="outline"
-          title="Register"
-        ></Button>
       </View>
-    </View>
+      <Button style={styles.btn} onPress={signIn} title="Login" />
+      <Button containerStyle={styles.btn} type="outline" title="Register" />
+      <View style={{ height: 100 }}></View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -49,8 +50,21 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
-      
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "white",
   },
-  inputContainer: {},
-  button: {},
+  titleName: {
+    fontSize: 30,
+    color: "blue",
+    marginBottom: 20,
+    marginTop: 50,
+    fontWeight: "bold",
+  },
+  inputContainer: {
+    width: 300,
+  },
+  btn: {
+      width: 200
+  }
 });
