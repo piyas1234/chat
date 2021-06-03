@@ -20,9 +20,9 @@ const SignUpScreen = ({ navigation }) => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
-        authUser.user.update({
+        authUser.user.updateProfile({
           displayName: name,
-          photoUrl:
+          photoURL:
             imgUrl ||
             "https://iconape.com/wp-content/png_logo_vector/user-circle.png",
         });
