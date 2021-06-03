@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Button,
   Image,
   KeyboardAvoidingView,
   StyleSheet,
@@ -8,15 +7,15 @@ import {
   View,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { Input } from "react-native-elements/dist/input/Input";
+import { Input, Button } from "react-native-elements";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const signIn = () => {};
   return (
-    <KeyboardAvoidingView style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <StatusBar style="light"></StatusBar>
       <Text style={styles.titleName}>FNChat</Text>
       <Image
@@ -39,8 +38,13 @@ const LoginScreen = () => {
           onChangeText={(text) => setPassword(text)}
         ></Input>
       </View>
-      <Button style={styles.btn} onPress={signIn} title="Login" />
-      <Button containerStyle={styles.btn} type="outline" title="Register" />
+      <Button containerStyle={styles.button} onPress={signIn} title="Login" />
+      <Button
+        onPress={() => navigation.navigate("Resister")}
+        containerStyle={styles.button}
+        type="outline"
+        title="Resister"
+      />
       <View style={{ height: 100 }}></View>
     </KeyboardAvoidingView>
   );
@@ -64,7 +68,8 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: 300,
   },
-  btn: {
-      width: 200
-  }
+  button: {
+    width: 150,
+    marginTop: 10,
+  },
 });
