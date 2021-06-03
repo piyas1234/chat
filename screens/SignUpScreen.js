@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState, useLayoutEffect } from "react";
 import { View, KeyboardAvoidingView, StyleSheet } from "react-native";
 import { Input, Button, Text } from "react-native-elements";
+import { auth } from "../firebase";
 
 const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -9,13 +10,25 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [imgUrl, setImgUrl] = useState("");
 
-  useLayoutEffect (() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
-        headerBackTitle: 'Login'
+      headerBackTitle: "Login",
     });
-  }, [navigation])
+  }, [navigation]);
 
-  const resister = () => {};
+  const resister = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        authUser.user.update({
+          displayName: name,
+          photoUrl:
+            imgUrl ||
+            "https://iconape.com/wp-content/png_logo_vector/user-circle.png",
+        });
+      })
+      .catch((error) => alert(error.message));
+  };
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <StatusBar style="light"></StatusBar>
