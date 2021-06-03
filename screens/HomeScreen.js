@@ -9,12 +9,17 @@ import { auth } from "../firebase";
 import { TouchableOpacity } from "react-native";
 
 const HomeScreen = ({ navigation }) => {
+  const signOutUser = () => {
+    auth.signOut().then(() => {
+      navigation.replace("Login");
+    });
+  };
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "FNChat",
+      title: 'FNChat',
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
-          <TouchableOpacity activeOpacity={0.5}>
+          <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
             <Avatar
               rounded
               source={{ uri: auth?.currentUser?.photoURL }}
@@ -34,9 +39,12 @@ const HomeScreen = ({ navigation }) => {
           <TouchableOpacity activeOpacity={0.5}>
             <AntDesign name="camerao" size={24} color="white"></AntDesign>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {
-              navigation.navigate('AddChat')
-          }} activeOpacity={0.5}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("AddChat");
+            }}
+            activeOpacity={0.5}
+          >
             <SimpleLineIcons
               name="pencil"
               size={24}
