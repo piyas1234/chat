@@ -1,14 +1,36 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Avatar, ListItem } from "react-native-elements";
+import { db } from "../firebase";
 
-const CustomListItems = ({id, chatName, enterChat}) => {
+const CustomListItems = ({ id, chatName, enterChat }) => {
+  const [chatMessages, setChatMessages] = useState([]);
+  useEffect(() => {
+    const unsubscribe = db
+      .collection("chats")
+      .doc(id)
+      .collection("messages")
+      .orderBy("timestamp", "decs")
+      .onSnapshot((snapshot) =>
+        setChatMessages(snapshot.docs.map((doc) => doc.data()))
+      );
+    return unsubscribe;
+  });
   return (
-    <ListItem onPress={() => enterChat(id, chatName)} key={id} bottomDivider>
+    <ListItem
+      key={id}
+      onPress={() => enterChat(id, chatName)}
+      key={id}
+      bottomDivider
+    >
       <Avatar
         rounded
         source={{
-          uri: "https://iconape.com/wp-content/png_logo_vector/user-circle.png",
+          uri:
+            chatMessages?.[0]?.photoURL ||
+            "https://iconape.com/wp-content/png_logo_vector/user-circle.png",
         }}
       ></Avatar>
       <ListItem.Content>
@@ -16,8 +38,7 @@ const CustomListItems = ({id, chatName, enterChat}) => {
           {chatName}
         </ListItem.Title>
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
-          This is Mobile. Lorem ipsum, dolor sit amet consectetur adipisicing
-          elit. Architecto laudantium veniam pariatur velit.
+          {chatMessages?.[0]?.displayName} : {chatMessages?.[0]?.message}
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>

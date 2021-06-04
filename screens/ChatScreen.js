@@ -25,7 +25,8 @@ const ChatScreen = ({ navigation, route }) => {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Avatar
             source={{
-              uri: "https://iconape.com/wp-content/png_logo_vector/user-circle.png",
+              uri:
+                messages[0]?.data.photoURL,
             }}
             rounded
           ></Avatar>
@@ -64,7 +65,7 @@ const ChatScreen = ({ navigation, route }) => {
         </View>
       ),
     });
-  }, [navigation]);
+  }, [navigation, messages]);
   const sendMessage = () => {
     Keyboard.dismiss();
     db.collection("chats").doc(route.params.id).collection("message").add({
@@ -100,7 +101,7 @@ const ChatScreen = ({ navigation, route }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
-            <ScrollView contentContainerStyle={{paddingTop: 15}}>
+            <ScrollView contentContainerStyle={{ paddingTop: 15 }}>
               {messages.map(({ id, data }) =>
                 data.email === auth.currentUser.email ? (
                   <View key={id} style={styles.reciver}>
@@ -184,12 +185,12 @@ const styles = StyleSheet.create({
   },
   recieverText: {
     color: "black",
-    fontWeight: '500',
+    fontWeight: "500",
     marginLeft: 10,
   },
   senderText: {
     color: "white",
-    fontWeight: '500',
+    fontWeight: "500",
     marginLeft: 10,
     // marginBottom: 15,
   },
@@ -200,7 +201,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 20,
     marginRight: 15,
-    maxWidth: '80%',
+    maxWidth: "80%",
     position: "relative",
   },
   sender: {
@@ -209,7 +210,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     borderRadius: 20,
     marginBottom: 20,
-    maxWidth: '80%',
+    maxWidth: "80%",
     position: "relative",
   },
 
