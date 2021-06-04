@@ -4,7 +4,7 @@ import { Avatar, ListItem } from "react-native-elements";
 
 const CustomListItems = ({id, chatName, enterChat}) => {
   return (
-    <ListItem>
+    <ListItem key={id} bottomDivider>
       <Avatar
         rounded
         source={{
@@ -13,7 +13,7 @@ const CustomListItems = ({id, chatName, enterChat}) => {
       ></Avatar>
       <ListItem.Content>
         <ListItem.Title style={{ fontWeight: "bold" }}>
-          Note 9 Pro
+          {chatName}
         </ListItem.Title>
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
           This is Mobile. Lorem ipsum, dolor sit amet consectetur adipisicing
