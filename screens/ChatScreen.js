@@ -25,8 +25,7 @@ const ChatScreen = ({ navigation, route }) => {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Avatar
             source={{
-              uri:
-                messages[0]?.data.photoURL,
+              uri: messages[0]?.data.photoURL,
             }}
             rounded
           ></Avatar>
@@ -119,7 +118,6 @@ const ChatScreen = ({ navigation, route }) => {
                       }}
                     ></Avatar>
                     <Text style={styles.recieverText}>{data.message}</Text>
-                    {/* <Text style={styles.senderName}>{data.displayName}</Text> */}
                   </View>
                 ) : (
                   <View key={id} style={styles.sender}>
@@ -133,10 +131,11 @@ const ChatScreen = ({ navigation, route }) => {
                       containerStyle={{
                         position: "absolute",
                         bottom: -15,
-                        right: 0,
+                        left: 0,
                       }}
                     ></Avatar>
                     <Text style={styles.senderText}>{data.message}</Text>
+                    <Text style={styles.senderName}>{data.displayName}</Text>
                   </View>
                 )
               )}
@@ -191,7 +190,7 @@ const styles = StyleSheet.create({
   senderText: {
     color: "white",
     fontWeight: "500",
-    marginLeft: 10,
+    marginRight: 10,
     // marginBottom: 15,
   },
   reciver: {
@@ -210,6 +209,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     borderRadius: 20,
     marginBottom: 20,
+    marginLeft: 10,
     maxWidth: "80%",
     position: "relative",
   },

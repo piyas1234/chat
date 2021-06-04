@@ -74,11 +74,11 @@ const HomeScreen = ({ navigation }) => {
   }, [navigation]);
 
   const enterChat = (id, chatName) => {
-    navigation.navigate('Chat', {
-      id: id,
-      chatName: chatName,
-    })
-  }
+    navigation.navigate("Chat", {
+      id,
+      chatName,
+    });
+  };
 
   return (
     <SafeAreaView>
@@ -100,6 +100,6 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%'
-  }
+    height: "100%",
+  },
 });

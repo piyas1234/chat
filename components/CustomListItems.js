@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Avatar, ListItem } from "react-native-elements";
@@ -12,12 +11,13 @@ const CustomListItems = ({ id, chatName, enterChat }) => {
       .collection("chats")
       .doc(id)
       .collection("messages")
-      .orderBy("timestamp", "decs")
+      .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) =>
         setChatMessages(snapshot.docs.map((doc) => doc.data()))
       );
     return unsubscribe;
-  });
+  }, []);
+  console.log(chatMessages);
   return (
     <ListItem
       key={id}
@@ -38,7 +38,7 @@ const CustomListItems = ({ id, chatName, enterChat }) => {
           {chatName}
         </ListItem.Title>
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
-          {chatMessages?.[0]?.displayName} : {chatMessages?.[0]?.message}
+          Click hare to message
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
